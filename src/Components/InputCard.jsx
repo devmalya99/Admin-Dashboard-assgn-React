@@ -37,13 +37,13 @@ const InputCard =()=>{
 
 
     return (
-        <Card className="w-96">
+        <Card className="w-96 ">
         <CardHeader
         variant="gradient"
         color="gray"
-        className="mb-4 grid h-28 place-items-center"
+        className="mb-4 grid h-28 place-items-center bg-green-400"
         >
-        <Typography variant="h3" color="white">
+        <Typography variant="h3" color="green">
           Admin Dashboard
         </Typography>
 
@@ -83,7 +83,7 @@ const InputCard =()=>{
 
 </select>
     </div>
-    <Button className="w-full mt-4"
+    <Button className="w-full mt-4 bg-green-400"
       onClick={handleSubmit}
     >
         Submit
