@@ -12,7 +12,7 @@ import {
   import React, { useState } from 'react'
   import {useDispatch} from 'react-redux'
   import {addProduct} from '../Redux/01Slices/ProductSlice'
-  import { v4 as uuidv4 } from 'uuid';
+
 
 
 const InputCard =()=>{
@@ -22,6 +22,7 @@ const InputCard =()=>{
     const [data,setData] = useState({
        
         productName:'',
+        productId: '',
         price:'',
         category:'',
     })
@@ -37,14 +38,13 @@ const InputCard =()=>{
 
     const handleSubmit=(e)=>{
         e.preventDefault();
-         // generate a unique id for the new product
-      const id = uuidv4();
 
       // send product information along with new id
-      dispatch(addProduct({...data, id}))
+      dispatch(addProduct(data))
 
       setData({
         productName: '',
+        productId: '',
         price: '',
         category: '',
     });
@@ -52,7 +52,7 @@ const InputCard =()=>{
 
 
     return (
-        <Card className="w-96 ">
+        <Card className="w-96 shadow-xl">
         <CardHeader
         variant="gradient"
         color="gray"
@@ -70,6 +70,15 @@ const InputCard =()=>{
         value={data.productName}
         type="text" 
         placeholder="Enter Product Name" 
+        onChange={handleInputChange} 
+        size="lg" />
+
+        <Input 
+        label="Product Id"
+        name="productId"
+        value={data.productId}
+        type="number" 
+        placeholder="Enter Product Id" 
         onChange={handleInputChange} 
         size="lg" />
 
