@@ -5,15 +5,16 @@ import {
     CardBody,
     CardFooter,
     Typography,
-    Input,
-    Button,
-    Select,
-    Option,
+   
   } from "@material-tailwind/react";
 
 import React from 'react'
-
+import {useSelector} from 'react-redux'
+import { v4 as uuidv4 } from 'uuid';
 const ProductList = () => {
+
+  const products = useSelector(state=>state.productsInfo)
+  console.log(products);
   return (
     <Card className="w-96 mt-8 ">
     <CardHeader
@@ -28,23 +29,18 @@ const ProductList = () => {
   </CardHeader>
   <CardBody className="flex flex-col gap-4">
    
-   <div className="bg-green-400 rounded-lg text-white p-4">
-    <li>List Item 1</li>
-   </div>
+  {products.map((item)=>
+  (
+   <div 
 
-   <div className="bg-green-400 rounded-lg text-white p-4">
-    <li>List Item 1</li>
-   </div>
-
-   <div className="bg-green-400 rounded-lg text-white p-4">
-    <li>List Item 1</li>
-   </div>
-
-
-   
+   key={item.id}
+   className="bg-green-400 rounded-lg text-white p-4">
+    {products.length > 0 && <li>{item.productName}~{item.price}~{item.category}</li>}
+    </div>  
+  ))}
    
 
-    
+   
   </CardBody>
   <CardFooter className="pt-0">
 

@@ -10,12 +10,17 @@ import {
   } from "@material-tailwind/react";
 
   import React, { useState } from 'react'
-
+  import {useDispatch} from 'react-redux'
+  import {addProduct} from '../Redux/01Slices/ProductSlice'
+  import { v4 as uuidv4 } from 'uuid';
 
 
 const InputCard =()=>{
 
+  const dispatch = useDispatch()
+
     const [data,setData] = useState({
+       
         productName:'',
         price:'',
         category:'',
@@ -31,8 +36,18 @@ const InputCard =()=>{
     };
 
     const handleSubmit=(e)=>{
-        e.preventDefault;
-        console.log(data);
+        e.preventDefault();
+         // generate a unique id for the new product
+      const id = uuidv4();
+
+      // send product information along with new id
+      dispatch(addProduct({...data, id}))
+
+      setData({
+        productName: '',
+        price: '',
+        category: '',
+    });
     }
 
 
@@ -52,6 +67,7 @@ const InputCard =()=>{
         <Input 
         label="Product Name"
         name="productName"
+        value={data.productName}
         type="text" 
         placeholder="Enter Product Name" 
         onChange={handleInputChange} 
@@ -61,6 +77,8 @@ const InputCard =()=>{
         label="Price"
         name="price"
         type="number"
+        // connect the value of the Input field to the state
+        value={data.price}
         placeholder="Enter Product Price"
         onChange={handleInputChange} 
         size="lg" />
@@ -72,6 +90,8 @@ const InputCard =()=>{
       <select 
     className="form-control" 
     name="category" 
+     // connect the value of the select field to the state
+     value={data.category}
     onChange={handleInputChange} 
     aria-label="Select Category"
 >
